@@ -3,6 +3,38 @@ package capgemini;
 import java.util.Scanner;
 
 public class Exercicio03 {
+	
+	static void gridString(String s) {
+		int fraseSemEspaco = s.length();
+		int k=0, linha, coluna;
+		linha = (int) Math.floor(Math.sqrt(fraseSemEspaco));
+		coluna = (int) Math.ceil(Math.sqrt(fraseSemEspaco));
+		
+		if (linha * coluna < fraseSemEspaco) {
+			linha = coluna;
+		}
+		
+		char grid[][] = new char[linha][coluna];
+		
+		for (int l=0;l<linha;l++) {
+			for (int c=0;c<coluna;c++) {
+				if (k < s.length()) {
+					grid[l][c] = s.charAt(k);
+				}
+				k++;
+			}
+		}
+		
+		for(int l=0;l<linha;l++) {
+			for (int c=0;c<coluna;c++) {
+				if (grid[l][c] == 0) {
+					break;
+				}
+				System.out.print(grid[l][c]);
+			}
+			System.out.println("");
+		}
+	}
 
 	public static void main (String[] args) {
 		
@@ -10,25 +42,9 @@ public class Exercicio03 {
 		Scanner input = new Scanner (System.in);
 		System.out.println("Insira uma frase qualquer:");
 		//Leitura da frase
-		String s = input.nextLine();
-		//Separando a string letra a letra em um vetor
-		String[] coluna = s.split(";");
-		
-		//Contagem dos caracteres sem espaço para definir tamanho máximo de linhas e colunas
-		int fraseSemEspaco = s.replace(" ", "").length();
-		//criando a matriz que vai armazenar as letras da frase
-		char characters[][] = new char[fraseSemEspaco][fraseSemEspaco];
-	
-		
-		for (int l=0; l < Math.sqrt(fraseSemEspaco); l++) {
-			characters[l] = coluna[0].toCharArray();
-		
-			for (char[] char1 : characters) {
-				for (char f : char1) {
-					System.out.print(f + " ");
-				}
-				System.out.println("");
-			}
-		}
+		String s0 = input.nextLine();
+		String s = s0.replaceAll("\\s+", "");
+		//Executa a função que transforma String-Grid
+		gridString(s);
 	}
 }
